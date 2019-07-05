@@ -1,5 +1,5 @@
 /*
-*   This file is part of betterDex
+*   This file is part of BetterDex
 *   Copyright (C) 2019 VoltZ, Epicpkmn11, Flame, RocketRobz, TotallyNotGuy
 *
 *   This program is free software: you can redistribute it and/or modify
