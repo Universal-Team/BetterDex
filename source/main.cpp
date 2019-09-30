@@ -23,111 +23,151 @@
 *         or requiring that modified versions of such material be marked in
 *         reasonable ways as different from the original version.
 */
-#include <citro3d.h>
-#include <citro2d.h>
+
+#include "logging.hpp"
+
+#include "common/structs.hpp"
+
+#include "gui/gui.hpp"
+
+#include "gui/screens/mainMenu.hpp"
+#include "gui/screens/screenCommon.hpp"
+
 #include <3ds.h>
-#include <algorithm>
 #include <dirent.h>
-#include <malloc.h>
-#include <sstream>
-#include <stdio.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <time.h>
-#include <unistd.h>
 
-#include "gui.hpp"
-#include "screenCommon.hpp"
+// The classic Fade Effect! ;P
+int fadealpha = 255;
+bool fadein = true;
 
+// Set to 1, if testing some stuff. Leave to 0, if normal use.
+int test = 0;
 
-struct ButtonPos {
-    int x;
-    int y;
-    int w;
-    int h;
-	int link;
-};
+// If true -> Exit LeafEdit.
+bool exiting = false;
 
-static touchPosition touch;
-extern C3D_RenderTarget* top;
-extern C3D_RenderTarget* bottom;
-int screenMode = 0;
+// Touch Touch!
+touchPosition touch;
 
-
-void screenoff()
-{
-    gspLcdInit();\
-    GSPLCD_PowerOffBacklight(GSPLCD_SCREEN_BOTH);\
-    gspLcdExit();
-}
-
-void screenon()
-{
-    gspLcdInit();\
-    GSPLCD_PowerOnBacklight(GSPLCD_SCREEN_BOTH);\
-    gspLcdExit();
-}
-
-bool touching(touchPosition touch, ButtonPos button) {
+// If button Position pressed -> Do something.
+bool touching(touchPosition touch, Structs::ButtonPos button) {
 	if (touch.px >= button.x && touch.px <= (button.x + button.w) && touch.py >= button.y && touch.py <= (button.y + button.h))
 		return true;
 	else
 		return false;
 }
 
+void TestStuff(void)
+{
+	if (test == 1) {
+		// Currently nothing to test.
+	} else if (test == 0) {
+	}
+}
+
+// If an Error while startup appears, Return this!
+
+static Result DisplayStartupError(const std::string& message, Result res)
+{
+    consoleInit(GFX_TOP, nullptr);
+    printf("\x1b[2;16H\x1b[34mBetterDex");
+    printf("\x1b[5;1HError during startup: \x1b[31m0x%08lX\x1b[0m", res);
+    printf("\x1b[8;1HDescription: \x1b[33m%s\x1b[0m", message.c_str());
+    printf("\x1b[29;16HPress START to exit.");
+
+	// For the Log.
+	std::string error = message;
+	error += ", ";
+	error += std::to_string(res);
+	Logging::writeToLog(error.c_str());
+
+    gfxFlushBuffers();
+    gfxSwapBuffers();
+    gspWaitForVBlank();
+    while (aptMainLoop() && !(hidKeysDown() & KEY_START))
+    {
+        hidScanInput();
+    }
+    return res;
+}
+
 int main()
 {
-	aptInit();
-	amInit();
-	sdmcInit();
-	romfsInit();
-	srvInit();
-	hidInit();
-	acInit();
+	// Initialize Everything and check for errors.
+	Result res;
     gfxInitDefault();
-	Gui::init();
+
+	if (R_FAILED(res = sdmcInit())) {
+		return DisplayStartupError("sdmcInit failed.", res);
+	}
+
+	// make folders if they don't exist
+	mkdir("sdmc:/3ds", 0777);	// For DSP dump
+	mkdir("sdmc:/BetterDex", 0777); // main Path.
+
+	Logging::createLogFile(); // Create Log File, if it doesn't exists already.
+
+	if (R_FAILED(res = romfsInit())) {
+		return DisplayStartupError("romfsInit failed.", res);
+	}
+
+	if (R_FAILED(res = acInit())) {
+		return DisplayStartupError("acInit failed.", res);
+	}
+
+	if (R_FAILED(res = amInit())) {
+		return DisplayStartupError("amInit failed.", res);
+	}
+
+	if (R_FAILED(res = cfguInit())) {
+		return DisplayStartupError("cfguInit failed.", res);
+	}
+
+	if (R_FAILED(res = Gui::init())) {
+		return DisplayStartupError("Gui::Init failed.", res);
+	}
 
 	osSetSpeedupEnable(true);	// Enable speed-up for New 3DS users
 
+	TestStuff();
+
+	// Set the Screen to the MainMenu.
+	Gui::setScreen(std::make_unique<MainMenu>());
+
+	// We write a successfull Message, because it launched Successfully. Lol.
+	Logging::writeToLog("BetterDex launched successfully!");
+
 	// Loop as long as the status is not exit
-    while (aptMainLoop())
+    while (aptMainLoop() && !exiting)
     {
         hidScanInput();
         u32 hHeld = hidKeysHeld();
         u32 hDown = hidKeysDown();
 		hidTouchRead(&touch);
-		start_frame();
+        C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+        C2D_TargetClear(top, BLACK);
+        C2D_TargetClear(bottom, BLACK);
 		Gui::clearTextBufs();
+		Gui::mainLoop(hDown, hHeld, touch);
+		C3D_FrameEnd(0);
 
-		// Draws a screen based on screenMode
-		switch(screenMode) {
-//#########################################################################################################
-			case mainScreen:
-				drawMainMenu();
-				break;
+		if (fadein == true) {
+			fadealpha -= 3;
+			if (fadealpha < 0) {
+				fadealpha = 0;
+				fadein = false;
+			}
 		}
+	}
 
-		// Scans inputs for the current screen
-		switch(screenMode) {
-//#########################################################################################################
-			case mainScreen:
-				MainMenuLogic(hDown, touch);
-				break;
-		}
-		if (hDown & KEY_START && screenMode == mainScreen) 
-		{
-			break;
-		}
-
-        end_frame();
-        Gui::clearTextBufs();
-    }
-	Gui::exit();
-	hidExit();
-	srvExit();
-	romfsExit();
+	// Exit every process.
+	cfguExit();
 	sdmcExit();
-	aptExit();
+	acExit();
+	amExit();
+	Gui::exit();
+	gfxExit();
+	romfsExit();
 
     return 0;
 }
