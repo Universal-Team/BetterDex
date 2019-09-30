@@ -30,6 +30,7 @@
 
 #include "gui/gui.hpp"
 
+#include "gui/screens/dexList.hpp"
 #include "gui/screens/mainMenu.hpp"
 #include "gui/screens/screenCommon.hpp"
 
@@ -63,6 +64,22 @@ void TestStuff(void)
 		// Currently nothing to test.
 	} else if (test == 0) {
 	}
+}
+
+std::vector<std::string> g_speciesDatabase;
+std::string languages[] = {"de", "en", "fr", "it", "jp"};
+
+void LoadSpeciesDatabase(int lang) {
+	g_speciesDatabase.clear();
+
+	std::string currentLine;
+	std::ifstream speciesDatabase("romfs:/lang/" + languages[lang] + "/species.txt", std::ifstream::in);
+
+	while (std::getline(speciesDatabase, currentLine)) {
+		g_speciesDatabase.push_back(currentLine);
+	}
+
+	speciesDatabase.close();
 }
 
 // If an Error while startup appears, Return this!
@@ -128,7 +145,7 @@ int main()
 	}
 
 	osSetSpeedupEnable(true);	// Enable speed-up for New 3DS users
-
+	LoadSpeciesDatabase(1);
 	TestStuff();
 
 	// Set the Screen to the MainMenu.

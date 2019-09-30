@@ -1,4 +1,4 @@
-	/*
+/*
 *   This file is part of BetterDex
 *   Copyright (C) 2019 VoltZ, Epicpkmn11, Flame, RocketRobz, TotallyNotGuy
 *
@@ -23,36 +23,26 @@
 *         or requiring that modified versions of such material be marked in
 *         reasonable ways as different from the original version.
 */
+#ifndef DEXLIST_HPP
+#define DEXLIST_HPP
 
-#include "gui/screens/dexList.hpp"
-#include "gui/screens/mainMenu.hpp"
-#include "gui/screens/screenCommon.hpp"
+#include "gui/screens/screen.hpp"
 
-extern bool exiting;
-extern int fadealpha;
-extern bool fadein;
+#include <string>
+#include <vector>
 
-void MainMenu::Draw(void) const
+class DexList : public SCREEN 
 {
-		Gui::ScreenDraw(top);
-		Gui::Draw_Rect(0, 0, 400, 240, BLUE);
-		Gui::Draw_Rect(0, 0, 400, 25, GRAY);
-		Gui::Draw_Rect(0, 215, 400, 25, GRAY);
-		Gui::sprite(0, sprites_betterDex_idx, 0, 25);
-		Gui::DrawString(395-Gui::GetStringWidth(FONT_SIZE_18, V_STRING), 216, FONT_SIZE_18, WHITE, V_STRING, 400);
-		if (fadealpha > 0) Gui::Draw_Rect(0, 0, 400, 240, C2D_Color32(0, 0, 0, fadealpha)); // Fade in/out effect
+public:
+	void Draw(void) const override;
+	void Logic(u32 hDown, u32 hHeld, touchPosition touch) override;
 
-		Gui::ScreenDraw(bottom);
-		Gui::Draw_Rect(0, 0, 320, 240, BLUE);
-		Gui::Draw_Rect(0, 0, 320, 25, GRAY);
-		Gui::Draw_Rect(0, 215, 320, 25, GRAY);
-		if (fadealpha > 0) Gui::Draw_Rect(0, 0, 320, 240, C2D_Color32(0, 0, 0, fadealpha)); // Fade in/out effect
-}
+private:
+	void DisplayList(void) const;
+	void DrawSprite(size_t imgindex, int x, int y) const;
+	void Search(void);
+	int pokedexNumber = 1;
+	int scrollIndex = 0;
+};
 
-void MainMenu::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
-	if (hDown & KEY_START) {
-		exiting = true;
-	} else if (hDown & KEY_A) {
-		Gui::setScreen(std::make_unique<DexList>());
-	}
-}
+#endif
