@@ -40,6 +40,8 @@ extern std::vector<std::string> g_speciesDatabase;
 std::string speciesName;
 std::string pokedex;
 
+extern bool touching(touchPosition touch, Structs::ButtonPos button);
+
 void DexList::DrawSprite(size_t imgindex, int x, int y) const
 {
 	C2D_Image img = C2D_SpriteSheetGetImage(spritesheet_pkm, imgindex);
@@ -73,6 +75,7 @@ void DexList::DisplayList(void) const {
 		Gui::Draw_Rect(0, 0, 320, 240, BLUE);
 		Gui::Draw_Rect(0, 0, 320, 25, GRAY);
 		Gui::Draw_Rect(0, 215, 320, 25, GRAY);
+		Gui::sprite(0, sprites_search_idx, 290, 3);
 }
 
 
@@ -137,6 +140,10 @@ void DexList::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
 		Gui::screenBack();
 		return;
 	} else if (hDown & KEY_START) {
+		Search();
+	}
+
+	if (hDown & KEY_TOUCH && touching(touch, search[0])) {
 		Search();
 	}
 }

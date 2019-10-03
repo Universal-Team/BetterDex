@@ -26,6 +26,8 @@
 #ifndef DEXLIST_HPP
 #define DEXLIST_HPP
 
+#include "common/structs.hpp"
+
 #include "gui/screens/screen.hpp"
 
 #include <string>
@@ -43,6 +45,10 @@ private:
 	void Search(void);
 	int pokedexNumber = 1;
 	int scrollIndex = 0;
+
+	std::vector<Structs::ButtonPos> search = {
+		{290, 3, 20, 20, -1},
+	};
 };
 
 #endif
