@@ -26,7 +26,7 @@
 
 #include "gui/screens/mainMenu.hpp"
 #include "gui/screens/screenCommon.hpp"
-#include "gui/screens/stats.hpp"
+#include "gui/screens/statsScreen.hpp"
 
 #include "gui/screens/dexList.hpp"
 
@@ -138,7 +138,7 @@ void DexList::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
 		return;
 	} else if (hDown & KEY_START) {
 		Search();
-	} else if (hDown & KEY_A) {
+	} else if (hDown & KEY_A && pokedexNumber == 1) {
 		Gui::setScreen(std::make_unique<StatsScreen>());
 	}
 

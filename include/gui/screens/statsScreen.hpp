@@ -23,8 +23,8 @@
 *         or requiring that modified versions of such material be marked in
 *         reasonable ways as different from the original version.
 */
-#ifndef STATS_HPP
-#define STATS_HPP
+#ifndef STATSSCREEN_HPP
+#define STATSSCREEN_HPP
 
 #include "gui/screens/screen.hpp"
 

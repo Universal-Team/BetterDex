@@ -24,8 +24,10 @@
 *         reasonable ways as different from the original version.
 */
 
+#include "stats.hpp"
+
 #include "gui/screens/screenCommon.hpp"
-#include "gui/screens/stats.hpp"
+#include "gui/screens/statsScreen.hpp"
 
 extern int pokedexNumber;
 extern std::vector<std::string> g_speciesDatabase;
@@ -42,9 +44,9 @@ void StatsScreen::Draw(void) const
 		Gui::DrawString(100, 0, 0.7f, WHITE, "BetterDex -> Stats Screen.", 400);
 
 		// Draw Pokémon inclusive name.
-		DrawPKMSprite(6, 10, 40);
+		DrawPKMSprite(1, 10, 40);
 		Gui::Draw_Rect(10, 140, 100, 25, GRAY);
-		Gui::DrawString(20, 142, 0.7f, WHITE, "Charizard", 400);
+		Gui::DrawString((400-Gui::GetStringWidth(0.7f, speciesName))/2-190+50, 142, 0.7f, WHITE, speciesName, 100);
 
 		// Draw Stats Text.
 		Gui::DrawString(200, 40, 0.7f, WHITE, "HP", 400);
@@ -52,7 +54,7 @@ void StatsScreen::Draw(void) const
 		Gui::DrawString(200, 100, 0.7f, WHITE, "Defense", 400);
 		Gui::DrawString(200, 130, 0.7f, WHITE, "Sp. Attack", 400);
 		Gui::DrawString(200, 160, 0.7f, WHITE, "Sp. Defense", 400);
-		Gui::DrawString(200, 190, 0.7f, WHITE, "Initiative", 400);
+		Gui::DrawString(200, 190, 0.7f, WHITE, "Speed", 400);
 
 		// Stats Boxes.
 		Gui::Draw_Rect(320, 35, 50, 25, GRAY);
@@ -63,12 +65,24 @@ void StatsScreen::Draw(void) const
 		Gui::Draw_Rect(320, 185, 50, 25, GRAY);
 
 		// Draw Stats.
-		Gui::DrawString(330, 40, 0.5f, WHITE, "78", 400);
-		Gui::DrawString(330, 70, 0.5f, WHITE, "84", 400);
-		Gui::DrawString(330, 100, 0.5f, WHITE, "78", 400);
-		Gui::DrawString(330, 130, 0.5f, WHITE, "109", 400);
-		Gui::DrawString(330, 160, 0.5f, WHITE, "85", 400);
-		Gui::DrawString(330, 190, 0.5f, WHITE, "100", 400);
+		std::string HP = std::to_string(HP::bulbasaur);
+		std::string Attack = std::to_string(Attack::bulbasaur);
+		std::string Defense = std::to_string(Defense::bulbasaur);
+		std::string SpAttack = std::to_string(SpAttack::bulbasaur);
+		std::string SpDefense = std::to_string(SpDefense::bulbasaur);
+		std::string Speed = std::to_string(Speed::bulbasaur);
+
+		Gui::DrawString((400-Gui::GetStringWidth(0.5f, HP))/2+120+25, 40, 0.5f, WHITE, HP, 400);
+
+		Gui::DrawString((400-Gui::GetStringWidth(0.5f, Attack))/2+120+25, 70, 0.5f, WHITE, Attack, 400);
+
+		Gui::DrawString((400-Gui::GetStringWidth(0.5f, Defense))/2+120+25, 100, 0.5f, WHITE, Defense, 400);
+
+		Gui::DrawString((400-Gui::GetStringWidth(0.5f, SpAttack))/2+120+25, 130, 0.5f, WHITE, SpAttack, 400);
+
+		Gui::DrawString((400-Gui::GetStringWidth(0.5f, SpDefense))/2+120+25, 160, 0.5f, WHITE, SpDefense, 400);
+
+		Gui::DrawString((400-Gui::GetStringWidth(0.5f, Speed))/2+120+25, 190, 0.5f, WHITE, Speed, 400);
 
 
 		Gui::ScreenDraw(bottom);
