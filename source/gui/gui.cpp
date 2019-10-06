@@ -69,14 +69,21 @@ void Gui::exit(void)
     C3D_Fini();
 }
 
-void Gui::sprite(int sheet, int key, int x, int y)
+
+void DrawPKMSprite(size_t imgindex, int x, int y)
+{
+	C2D_Image img = C2D_SpriteSheetGetImage(spritesheet_pkm, imgindex);
+	C2D_DrawImageAt(img, x, y, 0.5f, NULL, 2.5, 2.5);
+}
+
+void Gui::sprite(int sheet, int key, int x, int y, float ScaleX, float ScaleY)
 {
     if (sheet == 0) {
-        C2D_DrawImageAt(C2D_SpriteSheetGetImage(sprites, key), x, y, 0.5f);
+        C2D_DrawImageAt(C2D_SpriteSheetGetImage(sprites, key), x, y, 0.5f, NULL, ScaleX, ScaleY);
     } else if (sheet == 1) {
-        C2D_DrawImageAt(C2D_SpriteSheetGetImage(spritesheet_pkm, key), x, y, 0.5f);
+        C2D_DrawImageAt(C2D_SpriteSheetGetImage(spritesheet_pkm, key), x, y, 0.5f, NULL, ScaleX, ScaleY);
     } else if (sheet == 2) {
-        C2D_DrawImageAt(C2D_SpriteSheetGetImage(spritesheet_types, key), x, y, 0.5f);
+        C2D_DrawImageAt(C2D_SpriteSheetGetImage(spritesheet_types, key), x, y, 0.5f, NULL, ScaleX, ScaleY);
     }
 }
 

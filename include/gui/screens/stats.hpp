@@ -23,30 +23,20 @@
 *         or requiring that modified versions of such material be marked in
 *         reasonable ways as different from the original version.
 */
-#ifndef DEXLIST_HPP
-#define DEXLIST_HPP
-
-#include "common/structs.hpp"
+#ifndef STATS_HPP
+#define STATS_HPP
 
 #include "gui/screens/screen.hpp"
 
-#include <string>
 #include <vector>
 
-class DexList : public SCREEN 
+class StatsScreen : public SCREEN 
 {
 public:
 	void Draw(void) const override;
 	void Logic(u32 hDown, u32 hHeld, touchPosition touch) override;
 
 private:
-	void DisplayList(void) const;
-	void Search(void);
-	int scrollIndex = 0;
-
-	std::vector<Structs::ButtonPos> search = {
-		{290, 3, 20, 20, -1},
-	};
 };
 
 #endif

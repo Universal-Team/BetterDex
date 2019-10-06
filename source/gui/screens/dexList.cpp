@@ -26,6 +26,7 @@
 
 #include "gui/screens/mainMenu.hpp"
 #include "gui/screens/screenCommon.hpp"
+#include "gui/screens/stats.hpp"
 
 #include "gui/screens/dexList.hpp"
 
@@ -35,18 +36,14 @@
 #include <string>
 #include <vector>
 
-extern C2D_SpriteSheet spritesheet_pkm;
 extern std::vector<std::string> g_speciesDatabase;
 std::string speciesName;
 std::string pokedex;
+int pokedexNumber = 1;
 
 extern bool touching(touchPosition touch, Structs::ButtonPos button);
 
-void DexList::DrawSprite(size_t imgindex, int x, int y) const
-{
-	C2D_Image img = C2D_SpriteSheetGetImage(spritesheet_pkm, imgindex);
-	C2D_DrawImageAt(img, x, y, 0.5f, NULL, 2.5, 2.5);
-}
+
 
 void DexList::DisplayList(void) const {
 	Gui::ScreenDraw(top);
@@ -56,7 +53,7 @@ void DexList::DisplayList(void) const {
 
 	for (int i = 1; i < 808; i++) {
 		if (pokedexNumber == i) {
-			DrawSprite(i, 160, 80);
+			DrawPKMSprite(i, 160, 80);
 			speciesName = g_speciesDatabase[i];
 			pokedex = std::to_string(i);
 		}
@@ -141,6 +138,8 @@ void DexList::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
 		return;
 	} else if (hDown & KEY_START) {
 		Search();
+	} else if (hDown & KEY_A) {
+		Gui::setScreen(std::make_unique<StatsScreen>());
 	}
 
 	if (hDown & KEY_TOUCH && touching(touch, search[0])) {

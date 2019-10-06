@@ -68,7 +68,7 @@ namespace Gui
     void clearTextBufs(void);
     
     // Sprite Drawing.
-    void sprite(int sheet, int key, int x, int y);
+    void sprite(int sheet, int key, int x, int y, float ScaleX = 1.0, float ScaleY = 1.0);
 
     // Misc.
     bool Draw_Rect(float x, float y, float w, float h, u32 color);
@@ -80,5 +80,7 @@ namespace Gui
     float GetStringWidth(float size, std::string Text);
     float GetStringHeight(float size, std::string Text);
 }
+
+void DrawPKMSprite(size_t imgindex, int x, int y);
 
 #endif
