@@ -24,7 +24,7 @@
 *         reasonable ways as different from the original version.
 */
 
-#include "stats.hpp"
+#include "core/personal.hpp"
 
 #include "gui/screens/screenCommon.hpp"
 #include "gui/screens/statsScreen.hpp"
@@ -44,7 +44,7 @@ void StatsScreen::Draw(void) const
 		Gui::DrawString(100, 0, 0.7f, WHITE, "BetterDex -> Stats Screen.", 400);
 
 		// Draw Pokémon inclusive name.
-		DrawPKMSprite(1, 10, 40);
+		DrawPKMSprite(pokedexNumber, 10, 40);
 		Gui::Draw_Rect(10, 140, 100, 25, GRAY);
 		Gui::DrawString((400-Gui::GetStringWidth(0.7f, speciesName))/2-190+50, 142, 0.7f, WHITE, speciesName, 100);
 
@@ -65,12 +65,12 @@ void StatsScreen::Draw(void) const
 		Gui::Draw_Rect(320, 185, 50, 25, GRAY);
 
 		// Draw Stats.
-		std::string HP = std::to_string(HP::bulbasaur);
-		std::string Attack = std::to_string(Attack::bulbasaur);
-		std::string Defense = std::to_string(Defense::bulbasaur);
-		std::string SpAttack = std::to_string(SpAttack::bulbasaur);
-		std::string SpDefense = std::to_string(SpDefense::bulbasaur);
-		std::string Speed = std::to_string(Speed::bulbasaur);
+		std::string HP = std::to_string(PersonalSMUSUM::baseHP(pokedexNumber));
+		std::string Attack = std::to_string(PersonalSMUSUM::baseAtk(pokedexNumber));
+		std::string Defense = std::to_string(PersonalSMUSUM::baseDef(pokedexNumber));
+		std::string SpAttack = std::to_string(PersonalSMUSUM::baseSpa(pokedexNumber));
+		std::string SpDefense = std::to_string(PersonalSMUSUM::baseSpd(pokedexNumber));
+		std::string Speed = std::to_string(PersonalSMUSUM::baseSpe(pokedexNumber));
 
 		Gui::DrawString((400-Gui::GetStringWidth(0.5f, HP))/2+120+25, 40, 0.5f, WHITE, HP, 400);
 

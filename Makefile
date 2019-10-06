@@ -75,9 +75,9 @@ endif
 #---------------------------------------------------------------------------------
 TARGET		:=	BetterDex
 BUILD		:=	build
-SOURCES		:=	source source/common source/gui source/gui/screens
+SOURCES		:=	source source/common source/core source/gui source/gui/screens
 DATA		:=	data
-INCLUDES	:=	include include/common include/gui include/gui/screens
+INCLUDES	:=	include include/common include/core include/gui include/gui/screens
 GRAPHICS	:=	assets/gfx
 #GFXBUILD	:=	$(BUILD)
 ROMFS		:=	romfs

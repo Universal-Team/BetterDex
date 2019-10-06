@@ -138,7 +138,7 @@ void DexList::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
 		return;
 	} else if (hDown & KEY_START) {
 		Search();
-	} else if (hDown & KEY_A && pokedexNumber == 1) {
+	} else if (hDown & KEY_A) {
 		Gui::setScreen(std::make_unique<StatsScreen>());
 	}
 
