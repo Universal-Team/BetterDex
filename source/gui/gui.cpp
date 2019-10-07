@@ -35,38 +35,38 @@ C3D_RenderTarget* bottom;
 C2D_SpriteSheet sprites, spritesheet_pkm, spritesheet_types;
 C2D_TextBuf sizeBuf;
 C2D_Font defaultFont;
-std::stack<std::unique_ptr<SCREEN>> screens;
+std::stack<std::unique_ptr<Screen>> screens;
 bool currentScreen = false;
 
 void Gui::clearTextBufs(void)
 {
-    C2D_TextBufClear(sizeBuf);
+	C2D_TextBufClear(sizeBuf);
 }
 
 Result Gui::init(void)
 {
-    C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
-    C2D_Init(C2D_DEFAULT_MAX_OBJECTS);
-    C2D_Prepare();
-    top = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
-    bottom = C2D_CreateScreenTarget(GFX_BOTTOM, GFX_LEFT);
+	C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
+	C2D_Init(C2D_DEFAULT_MAX_OBJECTS);
+	C2D_Prepare();
+	top = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
+	bottom = C2D_CreateScreenTarget(GFX_BOTTOM, GFX_LEFT);
 
-    sizeBuf = C2D_TextBufNew(4096);
-    sprites    = C2D_SpriteSheetLoad("romfs:/gfx/sprites.t3x");
-    spritesheet_pkm   = C2D_SpriteSheetLoad("romfs:/gfx/pkm_spritesheet.t3x");
-    spritesheet_types = C2D_SpriteSheetLoad("romfs:/gfx/types_spritesheet.t3x");
-    defaultFont = C2D_FontLoadSystem(CFG_REGION_USA);
-    return 0;
+	sizeBuf = C2D_TextBufNew(4096);
+	sprites    = C2D_SpriteSheetLoad("romfs:/gfx/sprites.t3x");
+	spritesheet_pkm   = C2D_SpriteSheetLoad("romfs:/gfx/pkm_spritesheet.t3x");
+	spritesheet_types = C2D_SpriteSheetLoad("romfs:/gfx/types_spritesheet.t3x");
+	defaultFont = C2D_FontLoadSystem(CFG_REGION_USA);
+	return 0;
 }
 
 void Gui::exit(void)
 {
-    C2D_SpriteSheetFree(sprites);
-    C2D_SpriteSheetFree(spritesheet_pkm);
-    C2D_SpriteSheetFree(spritesheet_types);
-    C2D_TextBufDelete(sizeBuf);
-    C2D_Fini();
-    C3D_Fini();
+	C2D_SpriteSheetFree(sprites);
+	C2D_SpriteSheetFree(spritesheet_pkm);
+	C2D_SpriteSheetFree(spritesheet_types);
+	C2D_TextBufDelete(sizeBuf);
+	C2D_Fini();
+	C3D_Fini();
 }
 
 
@@ -78,13 +78,13 @@ void DrawPKMSprite(size_t imgindex, int x, int y)
 
 void Gui::sprite(int sheet, int key, int x, int y, float ScaleX, float ScaleY)
 {
-    if (sheet == 0) {
-        C2D_DrawImageAt(C2D_SpriteSheetGetImage(sprites, key), x, y, 0.5f, NULL, ScaleX, ScaleY);
-    } else if (sheet == 1) {
-        C2D_DrawImageAt(C2D_SpriteSheetGetImage(spritesheet_pkm, key), x, y, 0.5f, NULL, ScaleX, ScaleY);
-    } else if (sheet == 2) {
-        C2D_DrawImageAt(C2D_SpriteSheetGetImage(spritesheet_types, key), x, y, 0.5f, NULL, ScaleX, ScaleY);
-    }
+	if (sheet == 0) {
+		C2D_DrawImageAt(C2D_SpriteSheetGetImage(sprites, key), x, y, 0.5f, NULL, ScaleX, ScaleY);
+	} else if (sheet == 1) {
+		C2D_DrawImageAt(C2D_SpriteSheetGetImage(spritesheet_pkm, key), x, y, 0.5f, NULL, ScaleX, ScaleY);
+	} else if (sheet == 2) {
+		C2D_DrawImageAt(C2D_SpriteSheetGetImage(spritesheet_types, key), x, y, 0.5f, NULL, ScaleX, ScaleY);
+	}
 }
 
 void findAndReplaceAll(std::string & data, std::string toSearch, std::string replaceStr)
@@ -103,7 +103,7 @@ void findAndReplaceAll(std::string & data, std::string toSearch, std::string rep
 }
 
 void Gui::DrawStringCentered(float x, float y, float size, u32 color, std::string Text, int maxWidth) {
-    Gui::DrawString((currentScreen ? 400 : 320)+x-(std::min(maxWidth, (int)Gui::GetStringWidth(size, Text)/2)), y, size, color, Text, maxWidth);
+	Gui::DrawString((currentScreen ? 400 : 320)+x-(std::min(maxWidth, (int)Gui::GetStringWidth(size, Text)/2)), y, size, color, Text, maxWidth);
 }
 
 // Draw String or Text.
@@ -160,7 +160,7 @@ void Gui::mainLoop(u32 hDown, u32 hHeld, touchPosition touch) {
 }
 
 // Set the current Screen.
-void Gui::setScreen(std::unique_ptr<SCREEN> screen)
+void Gui::setScreen(std::unique_ptr<Screen> screen)
 {
 	screens.push(std::move(screen));
 }
@@ -176,4 +176,18 @@ void Gui::ScreenDraw(C3D_RenderTarget * screen)
 {
 	C2D_SceneBegin(screen);
 	currentScreen = screen == top ? 1 : 0;
+}
+
+void Gui::DrawScreen(bool topScreen) {
+	if (topScreen) {
+		Gui::ScreenDraw(top);
+		Gui::Draw_Rect(0, 0, 400, 240, BLUE);
+		Gui::Draw_Rect(0, 0, 400, 25, GRAY);
+		Gui::Draw_Rect(0, 215, 400, 25, GRAY);
+	} else {
+		Gui::ScreenDraw(bottom);
+		Gui::Draw_Rect(0, 0, 320, 240, BLUE);
+		Gui::Draw_Rect(0, 0, 320, 25, GRAY);
+		Gui::Draw_Rect(0, 215, 320, 25, GRAY);
+	}
 }

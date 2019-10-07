@@ -53,32 +53,33 @@
 
 namespace Gui
 {
-    // Init and Exit of the GUI.
-    Result init(void);
-    void exit(void);
+	// Init and Exit of the GUI.
+	Result init(void);
+	void exit(void);
 
-    // Screen and MainLoops.
+	// Screen and MainLoops.
 	void mainLoop(u32 hDown, u32 hHeld, touchPosition touch);
-	void setScreen(std::unique_ptr<SCREEN> screen);
+	void setScreen(std::unique_ptr<Screen> screen);
 	void screenBack(void);
-    C3D_RenderTarget* target(gfxScreen_t t);
-    void ScreenDraw(C3D_RenderTarget * screen);
+	C3D_RenderTarget* target(gfxScreen_t t);
+	void ScreenDraw(C3D_RenderTarget * screen);
 
-    // Clear Text.
-    void clearTextBufs(void);
-    
-    // Sprite Drawing.
-    void sprite(int sheet, int key, int x, int y, float ScaleX = 1.0, float ScaleY = 1.0);
+	// Clear Text.
+	void clearTextBufs(void);
+	
+	// Sprite Drawing.
+	void sprite(int sheet, int key, int x, int y, float ScaleX = 1.0, float ScaleY = 1.0);
 
-    // Misc.
-    bool Draw_Rect(float x, float y, float w, float h, u32 color);
+	// Misc.
+	bool Draw_Rect(float x, float y, float w, float h, u32 color);
+	void DrawScreen(bool topScreen = true);
 
-    // Text / String Functions.
-    void DrawStringCentered(float x, float y, float size, u32 color, std::string Text, int maxWidth = 0);
-    void DrawString(float x, float y, float size, u32 color, std::string Text, int maxWidth = 0);
-    void GetStringSize(float size, float *width, float *height, std::string Text);
-    float GetStringWidth(float size, std::string Text);
-    float GetStringHeight(float size, std::string Text);
+	// Text / String Functions.
+	void DrawStringCentered(float x, float y, float size, u32 color, std::string Text, int maxWidth = 0);
+	void DrawString(float x, float y, float size, u32 color, std::string Text, int maxWidth = 0);
+	void GetStringSize(float size, float *width, float *height, std::string Text);
+	float GetStringWidth(float size, std::string Text);
+	float GetStringHeight(float size, std::string Text);
 }
 
 void DrawPKMSprite(size_t imgindex, int x, int y);

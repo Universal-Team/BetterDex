@@ -46,10 +46,7 @@ extern bool touching(touchPosition touch, Structs::ButtonPos button);
 
 
 void DexList::DisplayList(void) const {
-	Gui::ScreenDraw(top);
-	Gui::Draw_Rect(0, 0, 400, 240, BLUE);
-	Gui::Draw_Rect(0, 0, 400, 25, GRAY);
-	Gui::Draw_Rect(0, 215, 400, 25, GRAY);
+	Gui::DrawScreen();
 
 	for (int i = 1; i < 808; i++) {
 		if (pokedexNumber == i) {
@@ -68,10 +65,7 @@ void DexList::DisplayList(void) const {
 		Gui::DrawString(100, 160, 0.7f, WHITE, name, 400);
 		Gui::DrawString(40, 215, 0.7f, WHITE, "BetterDex - Made by Universal-Team.", 400);
 
-		Gui::ScreenDraw(bottom);
-		Gui::Draw_Rect(0, 0, 320, 240, BLUE);
-		Gui::Draw_Rect(0, 0, 320, 25, GRAY);
-		Gui::Draw_Rect(0, 215, 320, 25, GRAY);
+		Gui::DrawScreen(false);
 		Gui::sprite(0, sprites_search_idx, 290, 3);
 }
 

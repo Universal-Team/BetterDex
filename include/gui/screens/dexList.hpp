@@ -33,7 +33,7 @@
 #include <string>
 #include <vector>
 
-class DexList : public SCREEN 
+class DexList : public Screen 
 {
 public:
 	void Draw(void) const override;

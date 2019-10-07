@@ -62,7 +62,6 @@ void TestStuff(void)
 {
 	if (test == 1) {
 		// Currently nothing to test.
-	} else if (test == 0) {
 	}
 }
 
@@ -86,11 +85,11 @@ void LoadSpeciesDatabase(int lang) {
 
 static Result DisplayStartupError(const std::string& message, Result res)
 {
-    consoleInit(GFX_TOP, nullptr);
-    printf("\x1b[2;16H\x1b[34mBetterDex");
-    printf("\x1b[5;1HError during startup: \x1b[31m0x%08lX\x1b[0m", res);
-    printf("\x1b[8;1HDescription: \x1b[33m%s\x1b[0m", message.c_str());
-    printf("\x1b[29;16HPress START to exit.");
+	consoleInit(GFX_TOP, nullptr);
+	printf("\x1b[2;16H\x1b[34mBetterDex");
+	printf("\x1b[5;1HError during startup: \x1b[31m0x%08lX\x1b[0m", res);
+	printf("\x1b[8;1HDescription: \x1b[33m%s\x1b[0m", message.c_str());
+	printf("\x1b[29;16HPress START to exit.");
 
 	// For the Log.
 	std::string error = message;
@@ -98,21 +97,21 @@ static Result DisplayStartupError(const std::string& message, Result res)
 	error += std::to_string(res);
 	Logging::writeToLog(error.c_str());
 
-    gfxFlushBuffers();
-    gfxSwapBuffers();
-    gspWaitForVBlank();
-    while (aptMainLoop() && !(hidKeysDown() & KEY_START))
-    {
-        hidScanInput();
-    }
-    return res;
+	gfxFlushBuffers();
+	gfxSwapBuffers();
+	gspWaitForVBlank();
+	while (aptMainLoop() && !(hidKeysDown() & KEY_START))
+	{
+		hidScanInput();
+	}
+	return res;
 }
 
 int main()
 {
 	// Initialize Everything and check for errors.
 	Result res;
-    gfxInitDefault();
+	gfxInitDefault();
 
 	if (R_FAILED(res = sdmcInit())) {
 		return DisplayStartupError("sdmcInit failed.", res);
@@ -155,15 +154,15 @@ int main()
 	Logging::writeToLog("BetterDex launched successfully!");
 
 	// Loop as long as the status is not exit
-    while (aptMainLoop() && !exiting)
-    {
-        hidScanInput();
-        u32 hHeld = hidKeysHeld();
-        u32 hDown = hidKeysDown();
+	while (aptMainLoop() && !exiting)
+	{
+		hidScanInput();
+		u32 hHeld = hidKeysHeld();
+		u32 hDown = hidKeysDown();
 		hidTouchRead(&touch);
-        C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
-        C2D_TargetClear(top, BLACK);
-        C2D_TargetClear(bottom, BLACK);
+		C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+		C2D_TargetClear(top, BLACK);
+		C2D_TargetClear(bottom, BLACK);
 		Gui::clearTextBufs();
 		Gui::mainLoop(hDown, hHeld, touch);
 		C3D_FrameEnd(0);
@@ -186,5 +185,5 @@ int main()
 	gfxExit();
 	romfsExit();
 
-    return 0;
+	return 0;
 }

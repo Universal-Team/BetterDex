@@ -34,18 +34,12 @@ extern bool fadein;
 
 void MainMenu::Draw(void) const
 {
-		Gui::ScreenDraw(top);
-		Gui::Draw_Rect(0, 0, 400, 240, BLUE);
-		Gui::Draw_Rect(0, 0, 400, 25, GRAY);
-		Gui::Draw_Rect(0, 215, 400, 25, GRAY);
+		Gui::DrawScreen();
 		Gui::sprite(0, sprites_betterDex_idx, 0, 25);
 		Gui::DrawString(395-Gui::GetStringWidth(FONT_SIZE_18, V_STRING), 216, FONT_SIZE_18, WHITE, V_STRING, 400);
 		if (fadealpha > 0) Gui::Draw_Rect(0, 0, 400, 240, C2D_Color32(0, 0, 0, fadealpha)); // Fade in/out effect
 
-		Gui::ScreenDraw(bottom);
-		Gui::Draw_Rect(0, 0, 320, 240, BLUE);
-		Gui::Draw_Rect(0, 0, 320, 25, GRAY);
-		Gui::Draw_Rect(0, 215, 320, 25, GRAY);
+		Gui::DrawScreen(false);
 		if (fadealpha > 0) Gui::Draw_Rect(0, 0, 320, 240, C2D_Color32(0, 0, 0, fadealpha)); // Fade in/out effect
 }
 

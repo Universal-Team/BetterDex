@@ -36,10 +36,7 @@ extern std::string pokedex;
 
 void StatsScreen::Draw(void) const
 {
-		Gui::ScreenDraw(top);
-		Gui::Draw_Rect(0, 0, 400, 240, BLUE);
-		Gui::Draw_Rect(0, 0, 400, 25, GRAY);
-		Gui::Draw_Rect(0, 215, 400, 25, GRAY);
+		Gui::DrawScreen();
 
 		Gui::DrawString(100, 0, 0.7f, WHITE, "BetterDex -> Stats Screen.", 400);
 
@@ -85,10 +82,7 @@ void StatsScreen::Draw(void) const
 		Gui::DrawString((400-Gui::GetStringWidth(0.5f, Speed))/2+120+25, 190, 0.5f, WHITE, Speed, 400);
 
 
-		Gui::ScreenDraw(bottom);
-		Gui::Draw_Rect(0, 0, 320, 240, BLUE);
-		Gui::Draw_Rect(0, 0, 320, 25, GRAY);
-		Gui::Draw_Rect(0, 215, 320, 25, GRAY);
+		Gui::DrawScreen(false);
 }
 
 void StatsScreen::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
