@@ -69,7 +69,7 @@ void Gui::exit(void)
 	C3D_Fini();
 }
 
-
+// Specific, to draw the Pokémon sprites.
 void DrawPKMSprite(size_t imgindex, int x, int y)
 {
 	C2D_Image img = C2D_SpriteSheetGetImage(spritesheet_pkm, imgindex);

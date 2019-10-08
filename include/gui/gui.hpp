@@ -43,14 +43,6 @@
 #include <string.h>
 #include <unordered_map>
 
-#define FONT_SIZE_18 0.72f
-#define FONT_SIZE_17 0.7f
-#define FONT_SIZE_15 0.6f
-#define FONT_SIZE_14 0.56f
-#define FONT_SIZE_12 0.50f
-#define FONT_SIZE_11 0.46f
-#define FONT_SIZE_9 0.37f
-
 namespace Gui
 {
 	// Init and Exit of the GUI.
@@ -63,6 +55,7 @@ namespace Gui
 	void screenBack(void);
 	C3D_RenderTarget* target(gfxScreen_t t);
 	void ScreenDraw(C3D_RenderTarget * screen);
+	void DrawScreen(bool topScreen = true);
 
 	// Clear Text.
 	void clearTextBufs(void);
@@ -72,7 +65,6 @@ namespace Gui
 
 	// Misc.
 	bool Draw_Rect(float x, float y, float w, float h, u32 color);
-	void DrawScreen(bool topScreen = true);
 
 	// Text / String Functions.
 	void DrawStringCentered(float x, float y, float size, u32 color, std::string Text, int maxWidth = 0);

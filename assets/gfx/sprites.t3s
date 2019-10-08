@@ -1,5 +1,5 @@
 --atlas -f rgba -z auto
 
-GUI/betterDex.png
-GUI/checkBox.png
-GUI/search.png
+gui/betterDex.png
+gui/checkBox.png
+gui/search.png

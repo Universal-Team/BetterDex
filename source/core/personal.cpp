@@ -24,7 +24,7 @@
  *         reasonable ways as different from the original version.
  */
 
-#include "personal.hpp"
+#include "core/personal.hpp"
 
 namespace PersonalSMUSUM
 {

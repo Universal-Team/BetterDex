@@ -30,7 +30,7 @@
 
 #include <vector>
 
-class StatsScreen : public Screen 
+class StatsScreen : public Screen
 {
 public:
 	void Draw(void) const override;

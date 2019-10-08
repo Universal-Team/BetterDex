@@ -43,11 +43,10 @@ int pokedexNumber = 1;
 
 extern bool touching(touchPosition touch, Structs::ButtonPos button);
 
-
-
 void DexList::DisplayList(void) const {
 	Gui::DrawScreen();
 
+	// Draw the Pokémon Sprite and get the name of it inclusive Pokédex Number.
 	for (int i = 1; i < 808; i++) {
 		if (pokedexNumber == i) {
 			DrawPKMSprite(i, 160, 80);
@@ -57,16 +56,16 @@ void DexList::DisplayList(void) const {
 	}
 
 
-		std::string pokedexString = "Pokedex Number: ";
-		std::string name = "Species: ";
-		name += speciesName;
-		pokedexString += pokedex;
-		Gui::DrawString(100, 0, 0.7f, WHITE, pokedexString, 400);
-		Gui::DrawString(100, 160, 0.7f, WHITE, name, 400);
-		Gui::DrawString(40, 215, 0.7f, WHITE, "BetterDex - Made by Universal-Team.", 400);
+	std::string pokedexString = "Pokedex Number: ";
+	std::string name = "Species: ";
+	name += speciesName;
+	pokedexString += pokedex;
+	Gui::DrawString(100, 0, 0.7f, WHITE, pokedexString, 400);
+	Gui::DrawString(100, 160, 0.7f, WHITE, name, 400);
+	Gui::DrawString(40, 215, 0.7f, WHITE, "BetterDex - Made by Universal-Team.", 400);
 
-		Gui::DrawScreen(false);
-		Gui::sprite(0, sprites_search_idx, 290, 3);
+	Gui::DrawScreen(false);
+	Gui::sprite(0, sprites_search_idx, 290, 3);
 }
 
 
@@ -108,12 +107,11 @@ void DexList::Search(void) {
 
 
 void DexList::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
-	gspWaitForVBlank();
 	if (hDown & KEY_DOWN) {
 		scrollIndex++;
-		gspWaitForVBlank();
 		pokedexNumber++;
 		if (pokedexNumber > 807)	pokedexNumber = 1;
+
 	} else if (hDown & KEY_UP) {
 		pokedexNumber--;
 		if (pokedexNumber < 1)	pokedexNumber = 807;
@@ -130,8 +128,6 @@ void DexList::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
 	} else if (hDown & KEY_B) {
 		Gui::screenBack();
 		return;
-	} else if (hDown & KEY_START) {
-		Search();
 	} else if (hDown & KEY_A) {
 		Gui::setScreen(std::make_unique<StatsScreen>());
 	}
