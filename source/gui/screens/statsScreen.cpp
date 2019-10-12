@@ -36,59 +36,47 @@ extern std::string pokedex;
 
 void StatsScreen::Draw(void) const
 {
-		Gui::ScreenDraw(top);
-		Gui::Draw_Rect(0, 0, 400, 240, BLUE);
-		Gui::Draw_Rect(0, 0, 400, 25, GRAY);
-		Gui::Draw_Rect(0, 215, 400, 25, GRAY);
+	Gui::DrawScreen();
+	Gui::DrawString(100, 0, 0.7f, WHITE, "BetterDex -> Stats Screen.", 400);
 
-		Gui::DrawString(100, 0, 0.7f, WHITE, "BetterDex -> Stats Screen.", 400);
+	// Draw Pokémon inclusive name.
+	DrawPKMSprite(pokedexNumber, 10, 40);
+	Gui::Draw_Rect(10, 140, 100, 25, GRAY);
+	Gui::DrawString((400-Gui::GetStringWidth(0.7f, speciesName))/2-190+50, 142, 0.7f, WHITE, speciesName, 100);
 
-		// Draw Pokémon inclusive name.
-		DrawPKMSprite(pokedexNumber, 10, 40);
-		Gui::Draw_Rect(10, 140, 100, 25, GRAY);
-		Gui::DrawString((400-Gui::GetStringWidth(0.7f, speciesName))/2-190+50, 142, 0.7f, WHITE, speciesName, 100);
+	// Draw Stats Text.
+	Gui::DrawString(200, 40, 0.7f, WHITE, "HP", 400);
+	Gui::DrawString(200, 70, 0.7f, WHITE, "Attack", 400);
+	Gui::DrawString(200, 100, 0.7f, WHITE, "Defense", 400);
+	Gui::DrawString(200, 130, 0.7f, WHITE, "Sp. Attack", 400);
+	Gui::DrawString(200, 160, 0.7f, WHITE, "Sp. Defense", 400);
+	Gui::DrawString(200, 190, 0.7f, WHITE, "Speed", 400);
 
-		// Draw Stats Text.
-		Gui::DrawString(200, 40, 0.7f, WHITE, "HP", 400);
-		Gui::DrawString(200, 70, 0.7f, WHITE, "Attack", 400);
-		Gui::DrawString(200, 100, 0.7f, WHITE, "Defense", 400);
-		Gui::DrawString(200, 130, 0.7f, WHITE, "Sp. Attack", 400);
-		Gui::DrawString(200, 160, 0.7f, WHITE, "Sp. Defense", 400);
-		Gui::DrawString(200, 190, 0.7f, WHITE, "Speed", 400);
+	// Stats Boxes.
+	Gui::Draw_Rect(320, 35, 50, 25, GRAY);
+	Gui::Draw_Rect(320, 65, 50, 25, GRAY);
+	Gui::Draw_Rect(320, 95, 50, 25, GRAY);
+	Gui::Draw_Rect(320, 125, 50, 25, GRAY);
+	Gui::Draw_Rect(320, 155, 50, 25, GRAY);
+	Gui::Draw_Rect(320, 185, 50, 25, GRAY);
 
-		// Stats Boxes.
-		Gui::Draw_Rect(320, 35, 50, 25, GRAY);
-		Gui::Draw_Rect(320, 65, 50, 25, GRAY);
-		Gui::Draw_Rect(320, 95, 50, 25, GRAY);
-		Gui::Draw_Rect(320, 125, 50, 25, GRAY);
-		Gui::Draw_Rect(320, 155, 50, 25, GRAY);
-		Gui::Draw_Rect(320, 185, 50, 25, GRAY);
+	// Get the base stats of the selected Pokémon and define it to a String.
+	std::string HP = std::to_string(PersonalSMUSUM::baseHP(pokedexNumber));
+	std::string Attack = std::to_string(PersonalSMUSUM::baseAtk(pokedexNumber));
+	std::string Defense = std::to_string(PersonalSMUSUM::baseDef(pokedexNumber));
+	std::string SpAttack = std::to_string(PersonalSMUSUM::baseSpa(pokedexNumber));
+	std::string SpDefense = std::to_string(PersonalSMUSUM::baseSpd(pokedexNumber));
+	std::string Speed = std::to_string(PersonalSMUSUM::baseSpe(pokedexNumber));
 
-		// Draw Stats.
-		std::string HP = std::to_string(PersonalSMUSUM::baseHP(pokedexNumber));
-		std::string Attack = std::to_string(PersonalSMUSUM::baseAtk(pokedexNumber));
-		std::string Defense = std::to_string(PersonalSMUSUM::baseDef(pokedexNumber));
-		std::string SpAttack = std::to_string(PersonalSMUSUM::baseSpa(pokedexNumber));
-		std::string SpDefense = std::to_string(PersonalSMUSUM::baseSpd(pokedexNumber));
-		std::string Speed = std::to_string(PersonalSMUSUM::baseSpe(pokedexNumber));
+	// Draw the base stats.
+	Gui::DrawString((400-Gui::GetStringWidth(0.5f, HP))/2+120+25, 40, 0.5f, WHITE, HP, 400);
+	Gui::DrawString((400-Gui::GetStringWidth(0.5f, Attack))/2+120+25, 70, 0.5f, WHITE, Attack, 400);
+	Gui::DrawString((400-Gui::GetStringWidth(0.5f, Defense))/2+120+25, 100, 0.5f, WHITE, Defense, 400);
+	Gui::DrawString((400-Gui::GetStringWidth(0.5f, SpAttack))/2+120+25, 130, 0.5f, WHITE, SpAttack, 400);
+	Gui::DrawString((400-Gui::GetStringWidth(0.5f, SpDefense))/2+120+25, 160, 0.5f, WHITE, SpDefense, 400);
+	Gui::DrawString((400-Gui::GetStringWidth(0.5f, Speed))/2+120+25, 190, 0.5f, WHITE, Speed, 400);
 
-		Gui::DrawString((400-Gui::GetStringWidth(0.5f, HP))/2+120+25, 40, 0.5f, WHITE, HP, 400);
-
-		Gui::DrawString((400-Gui::GetStringWidth(0.5f, Attack))/2+120+25, 70, 0.5f, WHITE, Attack, 400);
-
-		Gui::DrawString((400-Gui::GetStringWidth(0.5f, Defense))/2+120+25, 100, 0.5f, WHITE, Defense, 400);
-
-		Gui::DrawString((400-Gui::GetStringWidth(0.5f, SpAttack))/2+120+25, 130, 0.5f, WHITE, SpAttack, 400);
-
-		Gui::DrawString((400-Gui::GetStringWidth(0.5f, SpDefense))/2+120+25, 160, 0.5f, WHITE, SpDefense, 400);
-
-		Gui::DrawString((400-Gui::GetStringWidth(0.5f, Speed))/2+120+25, 190, 0.5f, WHITE, Speed, 400);
-
-
-		Gui::ScreenDraw(bottom);
-		Gui::Draw_Rect(0, 0, 320, 240, BLUE);
-		Gui::Draw_Rect(0, 0, 320, 25, GRAY);
-		Gui::Draw_Rect(0, 215, 320, 25, GRAY);
+	Gui::DrawScreen(false);
 }
 
 void StatsScreen::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
