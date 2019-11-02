@@ -60,7 +60,7 @@ steps:
     cd extras/builds/BetterDex/
     cp ../../../BetterDex.3dsx BetterDex.3dsx
     cp ../../../BetterDex.cia BetterDex.cia
-    qrencode -o BetterDex.png https://github.com/Universal-Team/raw/v$CURRENT_DATE/builds/BetterDex/BetterDex.cia
+    qrencode -o BetterDex.png https://github.com/Universal-Team/extras/raw/v$CURRENT_DATE/builds/BetterDex/BetterDex.cia
     git stage .
     git commit -m "BetterDex | $(COMMIT_TAG)"
     git push origin master
