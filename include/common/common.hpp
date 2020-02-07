@@ -1,6 +1,6 @@
 /*
 *   This file is part of BetterDex
-*   Copyright (C) 2019 VoltZ, Epicpkmn11, Flame, RocketRobz, TotallyNotGuy
+*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,27 +24,12 @@
 *         reasonable ways as different from the original version.
 */
 
-#ifndef COLORS_HPP
-#define COLORS_HPP
+#ifndef COMMON_HPP
+#define COMMON_HPP
 
-#include <citro2d.h>
-#include <citro3d.h>
-
-
-#define WHITE C2D_Color32(255, 255, 255, 255)
-
-#define BLACK C2D_Color32(0, 0, 0, 255)
-
-#define GRAY C2D_Color32(127, 127, 127, 255)
-
-#define BLUE C2D_Color32(0, 0, 128, 255)
-
-#define TRANSPARENT C2D_Color32(0, 0, 0, 0)
-
-#define RED C2D_Color32(255, 0, 0, 255)
-
-#define GREEN RGBA8(0, 255, 0, 255)
-
-typedef u32 Color;
+// This is the new "screenCommon.hpp", lol.
+#include "gfx.hpp"
+#include "gui.hpp"
+#include "screenCommon.hpp"
 
 #endif

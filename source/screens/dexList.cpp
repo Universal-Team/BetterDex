@@ -1,6 +1,6 @@
-	/*
+/*
 *   This file is part of BetterDex
-*   Copyright (C) 2019 VoltZ, Epicpkmn11, Flame, RocketRobz, TotallyNotGuy
+*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,11 +24,9 @@
 *         reasonable ways as different from the original version.
 */
 
-#include "gui/screens/mainMenu.hpp"
-#include "gui/screens/screenCommon.hpp"
-#include "gui/screens/statsScreen.hpp"
-
-#include "gui/screens/dexList.hpp"
+#include "dexList.hpp"
+#include "mainMenu.hpp"
+#include "statsScreen.hpp"
 
 #include <fstream>
 #include <memory>
@@ -44,12 +42,12 @@ int pokedexNumber = 1;
 extern bool touching(touchPosition touch, Structs::ButtonPos button);
 
 void DexList::DisplayList(void) const {
-	Gui::DrawScreen();
+	GFX::DrawTop();
 
 	// Draw the Pokémon Sprite and get the name of it inclusive Pokédex Number.
 	for (int i = 1; i < 808; i++) {
 		if (pokedexNumber == i) {
-			DrawPKMSprite(i, 160, 80);
+			GFX::DrawPKMSprite(i, 160, 80);
 			speciesName = g_speciesDatabase[i];
 			pokedex = std::to_string(i);
 		}
@@ -62,10 +60,10 @@ void DexList::DisplayList(void) const {
 	pokedexString += pokedex;
 	Gui::DrawString(100, 0, 0.7f, WHITE, pokedexString, 400);
 	Gui::DrawString(100, 160, 0.7f, WHITE, name, 400);
-	Gui::DrawString(40, 215, 0.7f, WHITE, "BetterDex - Made by Universal-Team.", 400);
+	Gui::DrawStringCentered(0, 215, 0.7f, WHITE, "BetterDex - Made by Universal-Team.", 400);
 
-	Gui::DrawScreen(false);
-	Gui::sprite(0, sprites_search_idx, 290, 3);
+	GFX::DrawBottom();
+	GFX::DrawSprite(sprites_search_idx, 290, 3);
 }
 
 

@@ -1,6 +1,6 @@
 /*
 *   This file is part of BetterDex
-*   Copyright (C) 2019 VoltZ, Epicpkmn11, Flame, RocketRobz, TotallyNotGuy
+*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -23,30 +23,39 @@
 *         or requiring that modified versions of such material be marked in
 *         reasonable ways as different from the original version.
 */
-#ifndef DEXLIST_HPP
-#define DEXLIST_HPP
 
-#include "common/structs.hpp"
+#include "common.hpp"
 
-#include "gui/screens/screen.hpp"
+extern C2D_SpriteSheet sprites, spritesheet_pkm, spritesheet_types;
 
-#include <string>
-#include <vector>
+void GFX::DrawTop(void) {
+	Gui::ScreenDraw(Top);
+	Gui::Draw_Rect(0, 0, 400, 240, BLUE);
+	Gui::Draw_Rect(0, 0, 400, 25, GRAY);
+	Gui::Draw_Rect(0, 215, 400, 25, GRAY);
+}
 
-class DexList : public Screen
+void GFX::DrawBottom(void) {
+	Gui::ScreenDraw(Bottom);
+	Gui::Draw_Rect(0, 0, 320, 240, BLUE);
+	Gui::Draw_Rect(0, 0, 320, 25, GRAY);
+	Gui::Draw_Rect(0, 215, 320, 25, GRAY);
+}
+
+// Draw PKMN Sprite.
+void GFX::DrawPKMSprite(int img, int x, int y, float ScaleX, float ScaleY)
 {
-public:
-	void Draw(void) const override;
-	void Logic(u32 hDown, u32 hHeld, touchPosition touch) override;
+	Gui::DrawSprite(spritesheet_pkm, img, x, y, ScaleX, ScaleY);
+}
 
-private:
-	void DisplayList(void) const;
-	void Search(void);
-	int scrollIndex = 0;
+// Draw Normal Sprite.
+void GFX::DrawSprite(int img, int x, int y, float ScaleX, float ScaleY)
+{
+	Gui::DrawSprite(sprites, img, x, y, ScaleX, ScaleY);
+}
 
-	std::vector<Structs::ButtonPos> search = {
-		{290, 3, 20, 20, -1},
-	};
-};
-
-#endif
+// Draw other sprites like Types.
+void GFX::DrawOther(int img, int x, int y, float ScaleX, float ScaleY)
+{
+	Gui::DrawSprite(spritesheet_types, img, x, y, ScaleX, ScaleY);
+}

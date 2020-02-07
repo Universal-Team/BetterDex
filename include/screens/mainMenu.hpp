@@ -1,6 +1,6 @@
 /*
 *   This file is part of BetterDex
-*   Copyright (C) 2019 VoltZ, Epicpkmn11, Flame, RocketRobz, TotallyNotGuy
+*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,21 +24,19 @@
 *         reasonable ways as different from the original version.
 */
 
-#ifndef STRUCTS_HPP
-#define STRUCTS_HPP
+#ifndef MAINMENU_HPP
+#define MAINMENU_HPP
 
-#include <string>
+#include "common.hpp"
+#include "structs.hpp"
 
-class Structs 
+#include <vector>
+
+class MainMenu : public Screen
 {
 public:
-	struct ButtonPos {
-		int x;
-		int y;
-		int w;
-		int h;
-		int link;
-	};
+	void Draw(void) const override;
+	void Logic(u32 hDown, u32 hHeld, touchPosition touch) override;
 
 private:
 };
