@@ -1,6 +1,6 @@
-	/*
+/*
 *   This file is part of BetterDex
-*   Copyright (C) 2019 VoltZ, Epicpkmn11, Flame, RocketRobz, TotallyNotGuy
+*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,10 +24,8 @@
 *         reasonable ways as different from the original version.
 */
 
-#include "core/personal.hpp"
-
-#include "gui/screens/screenCommon.hpp"
-#include "gui/screens/statsScreen.hpp"
+#include "personal.hpp"
+#include "statsScreen.hpp"
 
 extern int pokedexNumber;
 extern std::vector<std::string> g_speciesDatabase;
@@ -36,11 +34,11 @@ extern std::string pokedex;
 
 void StatsScreen::Draw(void) const
 {
-	Gui::DrawScreen();
-	Gui::DrawString(100, 0, 0.7f, WHITE, "BetterDex -> Stats Screen.", 400);
+	GFX::DrawTop();
+	Gui::DrawStringCentered(0, 2, 0.7f, WHITE, "BetterDex -> Stats Screen.", 400);
 
 	// Draw Pokémon inclusive name.
-	DrawPKMSprite(pokedexNumber, 10, 40);
+	GFX::DrawPKMSprite(pokedexNumber, 10, 40);
 	Gui::Draw_Rect(10, 140, 100, 25, GRAY);
 	Gui::DrawString((400-Gui::GetStringWidth(0.7f, speciesName))/2-190+50, 142, 0.7f, WHITE, speciesName, 100);
 
@@ -76,7 +74,7 @@ void StatsScreen::Draw(void) const
 	Gui::DrawString((400-Gui::GetStringWidth(0.5f, SpDefense))/2+120+25, 160, 0.5f, WHITE, SpDefense, 400);
 	Gui::DrawString((400-Gui::GetStringWidth(0.5f, Speed))/2+120+25, 190, 0.5f, WHITE, Speed, 400);
 
-	Gui::DrawScreen(false);
+	GFX::DrawBottom();
 }
 
 void StatsScreen::Logic(u32 hDown, u32 hHeld, touchPosition touch) {

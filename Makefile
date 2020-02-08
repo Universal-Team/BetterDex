@@ -75,15 +75,16 @@ endif
 #---------------------------------------------------------------------------------
 TARGET		:=	BetterDex
 BUILD		:=	build
-SOURCES		:=	source source/common source/core source/gui source/gui/screens
+UNIVCORE	:=	Universal-Core
+SOURCES		:=	$(UNIVCORE) source source/common source/core source/gui source/screens
 DATA		:=	data
-INCLUDES	:=	include include/common include/core include/gui include/gui/screens
+INCLUDES	:=	$(UNIVCORE) include include/common include/core include/gui include/screens
 GRAPHICS	:=	assets/gfx
 #GFXBUILD	:=	$(BUILD)
 ROMFS		:=	romfs
 GFXBUILD	:=	$(ROMFS)/gfx
 APP_AUTHOR	:=	Universal-Team
-APP_DESCRIPTION :=  	BetterDex
+APP_DESCRIPTION := BetterDex
 ICON		:=	app/icon.png
 BNR_IMAGE	:=  app/banner.png
 BNR_AUDIO	:=	app/BannerAudio.wav

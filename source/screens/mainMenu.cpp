@@ -1,6 +1,6 @@
-	/*
+/*
 *   This file is part of BetterDex
-*   Copyright (C) 2019 VoltZ, Epicpkmn11, Flame, RocketRobz, TotallyNotGuy
+*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,23 +24,17 @@
 *         reasonable ways as different from the original version.
 */
 
-#include "gui/screens/dexList.hpp"
-#include "gui/screens/mainMenu.hpp"
-#include "gui/screens/screenCommon.hpp"
+#include "dexList.hpp"
+#include "mainMenu.hpp"
 
 extern bool exiting;
-extern int fadealpha;
-extern bool fadein;
 
 void MainMenu::Draw(void) const
 {
-	Gui::DrawScreen();
-	Gui::sprite(0, sprites_betterDex_idx, 0, 25);
+	GFX::DrawTop();
+	GFX::DrawSprite(sprites_betterDex_idx, 0, 25);
 	Gui::DrawString(395-Gui::GetStringWidth(0.72f, V_STRING), 216, 0.72f, WHITE, V_STRING, 400);
-	if (fadealpha > 0) Gui::Draw_Rect(0, 0, 400, 240, C2D_Color32(0, 0, 0, fadealpha)); // Fade in/out effect
-
-	Gui::DrawScreen(false);
-	if (fadealpha > 0) Gui::Draw_Rect(0, 0, 320, 240, C2D_Color32(0, 0, 0, fadealpha)); // Fade in/out effect
+	GFX::DrawBottom();
 }
 
 void MainMenu::Logic(u32 hDown, u32 hHeld, touchPosition touch) {

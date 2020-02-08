@@ -1,6 +1,6 @@
 /*
- *   This file is part of PKSM
- *   Copyright (C) 2016-2019 Bernardo Giordano, Admiral Fish, piepie62
+ *   This file is part of PKSM-Core
+ *   Copyright (C) 2016-2020 Bernardo Giordano, Admiral Fish, piepie62
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -27,83 +27,95 @@
 #ifndef PERSONAL_HPP
 #define PERSONAL_HPP
 
-#include "core/coretypes.h"
-#include "core/personal_bwb2w2.h"
-#include "core/personal_dppthgss.h"
-#include "core/personal_smusum.h"
-#include "core/personal_xyoras.h"
+#include <3ds.h>
 
 namespace PersonalSMUSUM
 {
-	u8 baseHP(u16 species);
-	u8 baseAtk(u16 species);
-	u8 baseDef(u16 species);
-	u8 baseSpe(u16 species);
-	u8 baseSpa(u16 species);
-	u8 baseSpd(u16 species);
-	u8 type1(u16 species);
-	u8 type2(u16 species);
-	u8 gender(u16 species);
-	u8 baseFriendship(u16 species);
-	u8 expType(u16 species);
-	u8 ability(u16 species, u8 n);
-	u16 formStatIndex(u16 species);
-	u8 formCount(u16 species);
+    u8 baseHP(u16 species);
+    u8 baseAtk(u16 species);
+    u8 baseDef(u16 species);
+    u8 baseSpe(u16 species);
+    u8 baseSpa(u16 species);
+    u8 baseSpd(u16 species);
+    u8 type1(u16 species);
+    u8 type2(u16 species);
+    u8 gender(u16 species);
+    u8 baseFriendship(u16 species);
+    u8 expType(u16 species);
+    u8 ability(u16 species, u8 n);
+    u16 formStatIndex(u16 species);
+    u8 formCount(u16 species);
 }
 
 namespace PersonalXYORAS
 {
-	u8 baseHP(u16 species);
-	u8 baseAtk(u16 species);
-	u8 baseDef(u16 species);
-	u8 baseSpe(u16 species);
-	u8 baseSpa(u16 species);
-	u8 baseSpd(u16 species);
-	u8 type1(u16 species);
-	u8 type2(u16 species);
-	u8 gender(u16 species);
-	u8 baseFriendship(u16 species);
-	u8 expType(u16 species);
-	u8 ability(u16 species, u8 n);
-	u16 formStatIndex(u16 species);
-	u8 formCount(u16 species);
+    u8 baseHP(u16 species);
+    u8 baseAtk(u16 species);
+    u8 baseDef(u16 species);
+    u8 baseSpe(u16 species);
+    u8 baseSpa(u16 species);
+    u8 baseSpd(u16 species);
+    u8 type1(u16 species);
+    u8 type2(u16 species);
+    u8 gender(u16 species);
+    u8 baseFriendship(u16 species);
+    u8 expType(u16 species);
+    u8 ability(u16 species, u8 n);
+    u16 formStatIndex(u16 species);
+    u8 formCount(u16 species);
 }
 
 namespace PersonalBWB2W2
 {
-	u8 baseHP(u16 species);
-	u8 baseAtk(u16 species);
-	u8 baseDef(u16 species);
-	u8 baseSpe(u16 species);
-	u8 baseSpa(u16 species);
-	u8 baseSpd(u16 species);
-	u8 type1(u16 species);
-	u8 type2(u16 species);
-	u8 gender(u16 species);
-	u8 baseFriendship(u16 species);
-	u8 expType(u16 species);
-	u8 ability(u16 species, u8 n);
-	u16 formStatIndex(u16 species);
-	u8 formCount(u16 species);
+    u8 baseHP(u16 species);
+    u8 baseAtk(u16 species);
+    u8 baseDef(u16 species);
+    u8 baseSpe(u16 species);
+    u8 baseSpa(u16 species);
+    u8 baseSpd(u16 species);
+    u8 type1(u16 species);
+    u8 type2(u16 species);
+    u8 gender(u16 species);
+    u8 baseFriendship(u16 species);
+    u8 expType(u16 species);
+    u8 ability(u16 species, u8 n);
+    u16 formStatIndex(u16 species);
+    u8 formCount(u16 species);
 }
 
 namespace PersonalDPPtHGSS
 {
-	u8 baseHP(u16 species);
-	u8 baseAtk(u16 species);
-	u8 baseDef(u16 species);
-	u8 baseSpe(u16 species);
-	u8 baseSpa(u16 species);
-	u8 baseSpd(u16 species);
-	u8 type1(u16 species);
-	u8 type2(u16 species);
-	u8 baseExp(u8 species);
-	u8 gender(u16 species);
-	u8 baseFriendship(u16 species);
-	u8 expType(u16 species);
-	u8 ability(u16 species, u8 n);
-	u16 formStatIndex(u16 species);
-	u8 formCount(u16 species);
+    u8 baseHP(u16 species);
+    u8 baseAtk(u16 species);
+    u8 baseDef(u16 species);
+    u8 baseSpe(u16 species);
+    u8 baseSpa(u16 species);
+    u8 baseSpd(u16 species);
+    u8 type1(u16 species);
+    u8 type2(u16 species);
+    u8 gender(u16 species);
+    u8 baseFriendship(u16 species);
+    u8 expType(u16 species);
+    u8 ability(u16 species, u8 n);
+    u16 formStatIndex(u16 species);
+    u8 formCount(u16 species);
+}
+
+namespace PersonalRSFRLGE
+{
+    u8 baseHP(u16 species);
+    u8 baseAtk(u16 species);
+    u8 baseDef(u16 species);
+    u8 baseSpe(u16 species);
+    u8 baseSpa(u16 species);
+    u8 baseSpd(u16 species);
+    u8 type1(u16 species);
+    u8 type2(u16 species);
+    u8 gender(u16 species);
+    u8 baseFriendship(u16 species);
+    u8 expType(u16 species);
+    u8 ability(u16 species, u8 n);
+    u8 formCount(u16 species);
 }
 
 #endif

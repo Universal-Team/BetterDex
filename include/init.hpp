@@ -1,6 +1,6 @@
 /*
-*   This file is part of Universal-Manager/LeafEdit/BetterDex
-*   Copyright (C) 2019 VoltZ, Epicpkmn11, Flame, RocketRobz, TotallyNotGuy
+*   This file is part of BetterDex
+*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,20 +24,21 @@
 *         reasonable ways as different from the original version.
 */
 
-#include <fstream>
-#include <stdarg.h>
-#include <string>
-#include <time.h>
-#include <unistd.h>
+#ifndef INIT_HPP
+#define INIT_HPP
 
-namespace Logging {
-	// Create the Log File.
-	void createLogFile(void);
+#include <3ds.h>
 
-	// Write to the Log.
-	void writeToLog(std::string debugText);
+namespace Init {
+	// Load & Unload stuff.
+	void LoadSpeciesDatabase(int lang);
+	Result loadPkmnSheets();
+	Result unloadPkmnSheets();
 
-	// Other needed stuff. ;P
-	std::string logDate(void);
-	std::string format(const std::string& fmt_str, ...);
+	// Init, Mainloop & Exit.
+	Result Initialize();
+	Result MainLoop();
+	Result Exit();
 }
+
+#endif
