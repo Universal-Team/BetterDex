@@ -1,6 +1,6 @@
 /*
 *   This file is part of BetterDex
-*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
+*   Copyright (C) 2019-2020 Universal-Team
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -32,8 +32,7 @@ extern std::vector<std::string> g_speciesDatabase;
 extern std::string speciesName;
 extern std::string pokedex;
 
-void StatsScreen::Draw(void) const
-{
+void StatsScreen::Draw(void) const {
 	GFX::DrawTop();
 	Gui::DrawStringCentered(0, 2, 0.7f, WHITE, "BetterDex -> Stats Screen.", 400);
 

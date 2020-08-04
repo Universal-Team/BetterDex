@@ -1,6 +1,6 @@
 /*
 *   This file is part of BetterDex
-*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
+*   Copyright (C) 2019-2020 Universal-Team
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -43,19 +43,16 @@ void GFX::DrawBottom(void) {
 }
 
 // Draw PKMN Sprite.
-void GFX::DrawPKMSprite(int img, int x, int y, float ScaleX, float ScaleY)
-{
+void GFX::DrawPKMSprite(int img, int x, int y, float ScaleX, float ScaleY) {
 	Gui::DrawSprite(spritesheet_pkm, img, x, y, ScaleX, ScaleY);
 }
 
 // Draw Normal Sprite.
-void GFX::DrawSprite(int img, int x, int y, float ScaleX, float ScaleY)
-{
+void GFX::DrawSprite(int img, int x, int y, float ScaleX, float ScaleY) {
 	Gui::DrawSprite(sprites, img, x, y, ScaleX, ScaleY);
 }
 
 // Draw other sprites like Types.
-void GFX::DrawOther(int img, int x, int y, float ScaleX, float ScaleY)
-{
+void GFX::DrawOther(int img, int x, int y, float ScaleX, float ScaleY) {
 	Gui::DrawSprite(spritesheet_types, img, x, y, ScaleX, ScaleY);
 }

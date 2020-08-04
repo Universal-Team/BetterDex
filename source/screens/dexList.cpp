@@ -1,6 +1,6 @@
 /*
 *   This file is part of BetterDex
-*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
+*   Copyright (C) 2019-2020 Universal-Team
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -67,29 +67,28 @@ void DexList::DisplayList(void) const {
 }
 
 
-void DexList::Draw(void) const
-{
+void DexList::Draw(void) const {
 	DisplayList();
 }
 
-int getNumber(uint maxLength, int maxNum)
-{
+int getNumber(uint maxLength, int maxNum) {
 	int dex;
 	C3D_FrameEnd(0);
 	static SwkbdState state;
 	static bool first = true;
-	if (first)
-	{
+
+	if (first) {
 		swkbdInit(&state, SWKBD_TYPE_NUMPAD, 2, maxLength);
 		first = false;
 	}
+
 	swkbdSetFeatures(&state, SWKBD_FIXED_WIDTH);
 	swkbdSetValidation(&state, SWKBD_NOTBLANK_NOTEMPTY, 0, 0);
 	char input[maxLength + 1]	= {0};
 	SwkbdButton ret = swkbdInputText(&state, input, sizeof(input));
 	input[maxLength]		= '\0';
-	if (ret == SWKBD_BUTTON_CONFIRM)
-	{
+
+	if (ret == SWKBD_BUTTON_CONFIRM) {
 		dex = (int)std::min(std::stoi(input), maxNum);
 		first = true;
 		return dex;
@@ -106,27 +105,32 @@ void DexList::Search(void) {
 
 void DexList::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
 	if (hDown & KEY_DOWN) {
-		scrollIndex++;
+		this->scrollIndex++;
 		pokedexNumber++;
-		if (pokedexNumber > 807)	pokedexNumber = 1;
-
-	} else if (hDown & KEY_UP) {
+		if (pokedexNumber > 807) pokedexNumber = 1;
+	}
+	
+	if (hDown & KEY_UP) {
 		pokedexNumber--;
-		if (pokedexNumber < 1)	pokedexNumber = 807;
-
-	} else if (hDown & KEY_RIGHT) {
+		if (pokedexNumber < 1) pokedexNumber = 807;
+	}
+	
+	if (hDown & KEY_RIGHT) {
 		pokedexNumber += 10;
 		if (pokedexNumber > 796)	pokedexNumber = 1;
-
-	} else if (hDown & KEY_LEFT) {
+	}
+	
+	if (hDown & KEY_LEFT) {
 		pokedexNumber -= 10;
 		if (pokedexNumber < 12)	pokedexNumber = 807;
-
-
-	} else if (hDown & KEY_B) {
+	}
+	
+	if (hDown & KEY_B) {
 		Gui::screenBack();
 		return;
-	} else if (hDown & KEY_A) {
+	}
+	
+	if (hDown & KEY_A) {
 		Gui::setScreen(std::make_unique<StatsScreen>());
 	}
 

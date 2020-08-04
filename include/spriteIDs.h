@@ -1,6 +1,6 @@
 /*
 *   This file is part of BetterDex
-*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
+*   Copyright (C) 2019-2020 Universal-Team
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,8 +24,8 @@
 *         reasonable ways as different from the original version.
 */
 
-#ifndef SPRITEIDS_H
-#define SPRITEIDS_H
+#ifndef _BETTERDEX_SPRITEIDS_H
+#define _BETTERDEX_SPRITEIDS_H
 
 #include "pkm_spritesheet.h"
 #include "sprites.h"

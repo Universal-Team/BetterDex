@@ -1,6 +1,6 @@
 /*
 *   This file is part of BetterDex
-*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
+*   Copyright (C) 2019-2020 Universal-Team
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -29,8 +29,7 @@
 
 extern bool exiting;
 
-void MainMenu::Draw(void) const
-{
+void MainMenu::Draw(void) const {
 	GFX::DrawTop();
 	GFX::DrawSprite(sprites_betterDex_idx, 0, 25);
 	Gui::DrawString(395-Gui::GetStringWidth(0.72f, V_STRING), 216, 0.72f, WHITE, V_STRING, 400);
@@ -40,7 +39,9 @@ void MainMenu::Draw(void) const
 void MainMenu::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
 	if (hDown & KEY_START) {
 		exiting = true;
-	} else if (hDown & KEY_A) {
+	}
+	
+	if (hDown & KEY_A) {
 		Gui::setScreen(std::make_unique<DexList>());
 	}
 }

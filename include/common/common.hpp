@@ -1,6 +1,6 @@
 /*
 *   This file is part of BetterDex
-*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
+*   Copyright (C) 2019-2020 Universal-Team
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,10 +24,9 @@
 *         reasonable ways as different from the original version.
 */
 
-#ifndef COMMON_HPP
-#define COMMON_HPP
+#ifndef _BETTERDEX_COMMON_HPP
+#define _BETTERDEX_COMMON_HPP
 
-// This is the new "screenCommon.hpp", lol.
 #include "gfx.hpp"
 #include "gui.hpp"
 #include "screenCommon.hpp"

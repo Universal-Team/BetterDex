@@ -1,6 +1,6 @@
 /*
 *   This file is part of BetterDex
-*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
+*   Copyright (C) 2019-2020 Universal-Team
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -41,10 +41,8 @@ C2D_SpriteSheet sprites, spritesheet_pkm, spritesheet_types;
 
 // If button Position pressed -> Do something.
 bool touching(touchPosition touch, Structs::ButtonPos button) {
-	if (touch.px >= button.x && touch.px <= (button.x + button.w) && touch.py >= button.y && touch.py <= (button.y + button.h))
-		return true;
-	else
-		return false;
+	if (touch.px >= button.x && touch.px <= (button.x + button.w) && touch.py >= button.y && touch.py <= (button.y + button.h)) return true;
+	else return false;
 }
 
 std::vector<std::string> g_speciesDatabase;
@@ -64,9 +62,9 @@ void Init::LoadSpeciesDatabase(int lang) {
 }
 
 Result Init::loadPkmnSheets() {
-	sprites    			= C2D_SpriteSheetLoad("romfs:/gfx/sprites.t3x");
-	spritesheet_pkm   	= C2D_SpriteSheetLoad("romfs:/gfx/pkm_spritesheet.t3x");
-	spritesheet_types 	= C2D_SpriteSheetLoad("romfs:/gfx/types_spritesheet.t3x");
+	sprites					= C2D_SpriteSheetLoad("romfs:/gfx/sprites.t3x");
+	spritesheet_pkm			= C2D_SpriteSheetLoad("romfs:/gfx/pkm_spritesheet.t3x");
+	spritesheet_types		= C2D_SpriteSheetLoad("romfs:/gfx/types_spritesheet.t3x");
 	return 0;
 }
 
@@ -83,7 +81,6 @@ Result Init::Initialize() {
 	Gui::init();
 	loadPkmnSheets();
 	LoadSpeciesDatabase(1);
-	sdmcInit();
 	osSetSpeedupEnable(true);	// Enable speed-up for New 3DS users.
 
 	// make folders if they don't exist
@@ -99,8 +96,7 @@ Result Init::MainLoop() {
     Initialize();
 
 	// Loop as long as the status is not exiting.
-	while (aptMainLoop() && !exiting)
-	{
+	while (aptMainLoop() && !exiting) {
 		// Scan all the Inputs.
 		hidScanInput();
 		u32 hDown = hidKeysDown();
@@ -113,6 +109,7 @@ Result Init::MainLoop() {
 		Gui::mainLoop(hDown, hHeld, touch);
 		C3D_FrameEnd(0);
 	}
+
     // Exit all services and exit the app.
     Exit();
     return 0;
@@ -120,7 +117,6 @@ Result Init::MainLoop() {
 
 Result Init::Exit() {
 	cfguExit();
-	sdmcExit();
 	Gui::exit();
 	unloadPkmnSheets();
 	gfxExit();

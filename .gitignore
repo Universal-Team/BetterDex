@@ -8,3 +8,5 @@
 *.3dsx
 *.exe
 *.o
+romfs/gfx/sprites.t3x
+build/sprites.h
